@@ -14,7 +14,7 @@ Este arquivo define a configuração da instância RDS, do grupo de sub-redes pa
   - **instance_class**: Especifica o tipo da instância, configurado para `db.t3.micro`, uma instância otimizada para baixo custo.
   - **engine**: O motor de banco de dados usado é o PostgreSQL.
   - **name**: O nome do banco de dados é "lanchonete".
-  - **username** e **password**: As credenciais de acesso ao banco de dados são definidas como `masteruser` e `masterpassword`.
+  - **username** e **password**: As credenciais de acesso ao banco de dados são guardadas no secrets do repositório.
   - **vpc_security_group_ids**: Define o grupo de segurança associado à instância.
   - **db_subnet_group_name**: Associa a instância RDS ao grupo de sub-redes criado.
 
