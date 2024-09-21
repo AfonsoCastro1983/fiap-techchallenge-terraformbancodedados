@@ -28,8 +28,8 @@ jobs:
 
       - name: Terraform Plan
         env:
-          DB_USERNAME: ${{ secrets.DB_USERNAME }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_USERNAME: ${{ secrets.USER_DB }}
+          DB_PASSWORD: ${{ secrets.PASSWORD_DB }}
         run: terraform plan
 
       - name: Terraform Plan
