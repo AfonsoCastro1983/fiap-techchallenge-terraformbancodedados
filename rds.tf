@@ -71,6 +71,7 @@ resource "aws_db_instance" "rds" {
   instance_class       = "db.t3.micro"
   engine               = "postgres"
   db_name              = "lanchonete"
+  identifier           = "lanchonete-fiap"
   username             = var.db_username
   password             = var.db_password
   publicly_accessible  = true
