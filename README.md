@@ -32,7 +32,13 @@ Este arquivo define a saída do provisionamento, exibindo o endpoint do banco de
 
 - **rds_endpoint**: Exibe o endpoint da instância RDS, que será utilizado pelas aplicações para se conectarem ao banco de dados.
 
-### 3. `.github/workflows/deploy.yml`
+### 3. `variables.tf`
+Este arquivo define as variáveis utilizadas para guardar o usuário e senha do banco em tempo de execução.
+
+### 4. `terraform.tfvars`
+Relaciona as variáveis do arquivo `variables.tf` com a nomenclatura da variável do script
+
+### 5. `.github/workflows/deploy.yml`
 Este arquivo define o pipeline de CI/CD para automatizar o deploy da infraestrutura via GitHub Actions. Ele executa o Terraform para provisionar a infraestrutura sempre que há mudanças no código.
 
 #### Etapas:
@@ -46,37 +52,3 @@ Este arquivo define o pipeline de CI/CD para automatizar o deploy da infraestrut
 - **Planejamento**: Executa o comando `terraform plan` para gerar um plano de execução, garantindo que todas as mudanças sejam verificadas antes de aplicar.
 
 - **Aplicação**: Caso o plano seja aprovado, o comando `terraform apply` é executado para provisionar a infraestrutura na AWS.
-
-#### Exemplo de Configuração (`.github/workflows/deploy.yml`):
-
-```yaml
-name: Terraform Deploy
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  terraform:
-    name: Deploy RDS Instance
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
-      with:
-        terraform_version: 1.0.0
-
-    - name: Terraform Init
-      run: terraform init
-
-    - name: Terraform Plan
-      run: terraform plan
-
-    - name: Terraform Apply
-      if: github.ref == 'refs/heads/main'
-      run: terraform apply -auto-approve
