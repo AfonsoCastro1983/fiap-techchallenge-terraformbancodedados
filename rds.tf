@@ -1,5 +1,13 @@
 provider "aws" {
   region = "us-east-2"
+
+}
+# VPC
+resource "aws_vpc" "lanchoneteFIAP" {
+  cidr_block = "10.0.0.0/16"
+  tags = {
+    Name = "lanchoneteFIAP-vpc"
+  }
 }
 
 # Subnet A
