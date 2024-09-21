@@ -32,6 +32,37 @@ resource "aws_subnet" "subnetB" {
   }
 }
 
+# Internet Gateway
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.lanchoneteFIAP.id
+  tags = {
+    Name = "lanchoneteFIAP-igw"
+  }
+}
+
+# Route Table
+resource "aws_route_table" "rt" {
+  vpc_id = aws_vpc.lanchoneteFIAP.id
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.igw.id
+  }
+  tags = {
+    Name = "lanchoneteFIAP-rt"
+  }
+}
+
+# Subnet Route Table Association
+resource "aws_route_table_association" "rta_subnetA" {
+  subnet_id      = aws_subnet.subnetA.id
+  route_table_id = aws_route_table.rt.id
+}
+
+resource "aws_route_table_association" "rta_subnetB" {
+  subnet_id      = aws_subnet.subnetB.id
+  route_table_id = aws_route_table.rt.id
+}
+
 # RDS Database
 resource "aws_db_instance" "rds" {
   allocated_storage    = 20
