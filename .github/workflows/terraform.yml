@@ -27,6 +27,9 @@ jobs:
         run: terraform init
 
       - name: Terraform Plan
+        env:
+          DB_USERNAME: ${{ secrets.USER_DB }}
+          DB_PASSWORD: ${{ secrets.PASSWORD_DB }}
         run: terraform plan
 
       - name: Terraform Apply
