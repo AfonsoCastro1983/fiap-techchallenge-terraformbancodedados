@@ -4,8 +4,8 @@ resource "aws_db_instance" "rds" {
   instance_class       = "db.t3.micro"
   engine               = "postgres"
   name                 = "lanchonete"
-  username             = ${{ var.db_username }}
-  password             = ${{ var.db_password }}
+  username             = var.db_username
+  password             = var.db_password
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
   db_subnet_group_name = aws_db_subnet_group.rds_subnet_group.id
 }
